@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AMH – Maoni ya Wagonjwa</title>
+<meta name="theme-color" content="#0B6E6E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect width=%2224%22 height=%2224%22 rx=%225%22 fill=%22%230B6E6E%22/%3E%3Cpath d=%22M9 4h6v5h5v6h-5v5H9v-5H4V9h5z%22 fill=%22white%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#0B6E6E;--brand-d:#074848;--brand-l:#E7F3F2;--ink:#13222B;--mut:#5A6B75;--line:#D9E3E6;--bg:#F2F6F6;--ipd:#1D5FA8;--ipd-l:#E8F0FA;--opd:#B86E00;--opd-l:#FDF3E3;--err:#C62828}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.5}
+.top{background:radial-gradient(1200px 300px at 90% -50%,rgba(255,255,255,.18),transparent),linear-gradient(135deg,var(--brand),var(--brand-d));color:#fff;padding:26px 20px 78px}
+.top .in{max-width:720px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;opacity:.92}
+.logo{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center;flex:none}
+.logo svg{width:20px;height:20px}
+h1{font-size:27px;line-height:1.2;margin:16px 0 6px;font-weight:800;letter-spacing:-.01em}
+.top p{margin:0;opacity:.88;font-size:15px;max-width:520px}
+main{max-width:720px;margin:-54px auto 48px;padding:0 16px}
+.card{background:#fff;border-radius:18px;box-shadow:0 1px 2px rgba(10,40,50,.05),0 10px 30px rgba(10,40,50,.07);padding:22px 20px;margin-bottom:14px}
+.card h2{font-size:17px;margin:0 0 4px;font-weight:700}
+.card .sub{color:var(--mut);font-size:14px;margin:0 0 16px}
+.field{margin-bottom:18px}
+.field:last-child{margin-bottom:0}
+.lbl{display:block;font-weight:600;font-size:15px;margin-bottom:8px}
+.lbl .req{color:var(--err);margin-left:2px}
+.hint{display:block;color:var(--mut);font-size:13px;font-weight:500;margin-top:-4px;margin-bottom:8px}
+input[type=text],input[type=date],textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#FAFCFC;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s,background .15s}
+textarea{min-height:92px;resize:vertical}
+input:focus,textarea:focus{border-color:var(--brand);background:#fff;box-shadow:0 0 0 4px rgba(11,110,110,.12)}
+.row2{display:grid;grid-template-columns:1fr;gap:0 14px}
+@media(min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts.col{flex-direction:column}
+.pill{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pill input{position:absolute;opacity:0;pointer-events:none}
+.pill span{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border:1.5px solid var(--line);border-radius:999px;font-weight:600;font-size:15px;background:#fff;transition:all .15s;user-select:none}
+.opts.col .pill span{display:flex;border-radius:12px;padding:12px 14px;font-weight:500}
+.opts.col .pill span::before{content:"";width:20px;height:20px;border:2px solid #B7C6CB;border-radius:6px;flex:none;transition:all .15s;background:#fff center/14px no-repeat}
+.pill:hover span{border-color:#9FB7BD}
+.pill input:checked+span{background:var(--brand);border-color:var(--brand);color:#fff}
+.opts.col .pill input:checked+span{background:var(--brand-l);color:var(--ink);border-color:var(--brand)}
+.opts.col .pill input:checked+span::before{background-color:var(--brand);border-color:var(--brand);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E")}
+.pill input:focus-visible+span{box-shadow:0 0 0 4px rgba(11,110,110,.18)}
+.q{padding:16px 0;border-top:1px solid #EDF2F3}
+.q:first-of-type{border-top:0;padding-top:0}
+.q .follow{margin-top:12px}
+.other{margin-top:8px;display:none}
+.other.on{display:block}
+.err-msg{display:none;color:var(--err);font-size:13.5px;font-weight:600;margin-top:8px}
+.has-err .err-msg{display:block}
+.has-err input[type=text],.has-err input[type=date],.has-err .pill span{border-color:#E7A3A3}
+.mods{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:560px){.mods{grid-template-columns:1fr 1fr}}
+.mod{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:20px;border-radius:16px;border:1.5px solid var(--line);background:#fff;transition:transform .12s,box-shadow .15s,border-color .15s}
+.mod:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(10,40,50,.08)}
+.mod:focus-visible{box-shadow:0 0 0 4px rgba(11,110,110,.2)}
+.mod .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center}
+.mod .ic svg{width:26px;height:26px}
+.mod b{font-size:20px;font-weight:800;letter-spacing:.01em}
+.mod small{color:var(--mut);font-size:14px;font-weight:500}
+.mod.ipd .ic{background:var(--ipd-l);color:var(--ipd)} .mod.ipd b{color:var(--ipd)} .mod.ipd:hover{border-color:var(--ipd)}
+.mod.opd .ic{background:var(--opd-l);color:var(--opd)} .mod.opd b{color:var(--opd)} .mod.opd:hover{border-color:var(--opd)}
+.mod .go{margin-top:2px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.back{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:#fff;background:rgba(255,255,255,.16);padding:8px 14px;border-radius:999px}
+.back:hover{background:rgba(255,255,255,.26)}
+.tag{font-size:12px;font-weight:800;letter-spacing:.08em;padding:6px 12px;border-radius:999px;background:#fff}
+.tag.ipd{color:var(--ipd)} .tag.opd{color:var(--opd)}
+.pr-card{background:linear-gradient(0deg,#F7FAFA,#F7FAFA);border:1.5px dashed #BFD3D6;box-shadow:none}
+.pr-card h2{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--brand)}
+.submit{all:unset;box-sizing:border-box;cursor:pointer;width:100%;text-align:center;background:var(--brand);color:#fff;font-weight:700;font-size:16.5px;padding:16px;border-radius:14px;box-shadow:0 8px 20px rgba(11,110,110,.25);transition:background .15s,transform .1s}
+.submit:hover{background:var(--brand-d)}
+.submit:active{transform:scale(.99)}
+.submit[disabled]{opacity:.65;cursor:wait}
+.spin{display:inline-block;width:16px;height:16px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:s .7s linear infinite;vertical-align:-3px;margin-right:8px}
+@keyframes s{to{transform:rotate(360deg)}}
+.form-err{display:none;background:#FDECEC;color:var(--err);border-radius:12px;padding:12px 14px;font-weight:600;font-size:14px;margin-bottom:12px}
+.thanks{text-align:center;padding:40px 22px}
+.tick{width:76px;height:76px;border-radius:50%;background:var(--brand-l);display:grid;place-items:center;margin:0 auto 18px;animation:pop .35s ease-out}
+.tick svg{width:40px;height:40px;color:var(--brand)}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+.thanks h2{font-size:24px;margin:0 0 8px;font-weight:800}
+.thanks p{color:var(--mut);margin:0 auto 24px;max-width:420px}
+.btns{display:flex;flex-direction:column;gap:10px;max-width:340px;margin:0 auto}
+.ghost{all:unset;box-sizing:border-box;cursor:pointer;width:100%;text-align:center;font-weight:700;padding:14px;border-radius:14px;border:1.5px solid var(--line);color:var(--ink)}
+.ghost:hover{border-color:var(--brand);color:var(--brand)}
+footer{text-align:center;color:var(--mut);font-size:12.5px;padding:0 16px 28px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="in">
+    <div id="topbar" class="bar" hidden>
+      <button class="back" type="button" onclick="goHome()">&#8592; Rudi</button>
+      <span id="toptag" class="tag"></span>
+    </div>
+    <div class="brand">
+      <span class="logo"><svg viewBox="0 0 24 24" fill="#0B6E6E"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z"/></svg></span>
+      Abdala Mzee Hospital · AMH
+    </div>
+    <h1 id="title">Maoni ya Wagonjwa</h1>
+    <p id="subtitle">Maoni yako yanatusaidia kuboresha huduma kwa wagonjwa wetu.</p>
+  </div>
+</header>
+
+<main>
+
+<section id="home" class="screen">
+  <div class="card">
+    <div class="field" id="pr-wrap">
+      <label class="lbl" for="pr">Jina la PR Officer<span class="req">*</span></label>
+      <input type="text" id="pr" autocomplete="name" placeholder="Andika jina lako">
+      <div class="err-msg">Tafadhali andika jina lako kwanza.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Chagua moduli</h2>
+    <p class="sub">Chagua aina ya mgonjwa unayemjazia fomu.</p>
+    <div class="mods">
+      <button class="mod ipd" type="button" onclick="openModule('IPD')">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/><path d="M10 13h8"/></svg></span>
+        <b>IPD</b>
+        <small>Wagonjwa wa kulazwa — ijazwe mgonjwa anaporuhusiwa kwenda nyumbani.</small>
+        <span class="go">Anza fomu ya IPD &#8594;</span>
+      </button>
+      <button class="mod opd" type="button" onclick="openModule('OPD')">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></span>
+        <b>OPD</b>
+        <small>Wagonjwa wa nje — maoni na changamoto za huduma ya leo.</small>
+        <span class="go">Anza fomu ya OPD &#8594;</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="IPD" class="screen" hidden>
+<form id="f-IPD" novalidate>
+  <div class="card">
+    <h2>Taarifa za mgonjwa</h2>
+    <p class="sub">Sehemu zenye <span style="color:var(--err)">*</span> ni lazima.</p>
+    <div class="field"><label class="lbl">Jina la Mgonjwa</label><input type="text" name="jina" placeholder="Hiari"></div>
+    <div class="field" data-req="wodi"><label class="lbl">Wodi<span class="req">*</span></label><input type="text" name="wodi" placeholder="mf. Wodi ya Wanawake"><div class="err-msg">Tafadhali jaza wodi.</div></div>
+    <div class="row2">
+      <div class="field" data-req="kulazwa"><label class="lbl">Tarehe ya Kulazwa<span class="req">*</span></label><input type="date" name="kulazwa"><div class="err-msg">Chagua tarehe.</div></div>
+      <div class="field" data-req="kuruhusiwa"><label class="lbl">Tarehe ya Kuruhusiwa<span class="req">*</span></label><input type="date" name="kuruhusiwa"><div class="err-msg">Chagua tarehe.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Maoni kuhusu huduma</h2>
+    <p class="sub">Wakati wa kukaa hospitalini.</p>
+    <div id="ipd-qs"></div>
+    <div class="q"><label class="lbl">5. Ni changamoto gani kubwa zaidi uliyoipata wakati wa kukaa hospitalini?</label><textarea name="q5"></textarea></div>
+    <div class="q"><label class="lbl">6. Ni huduma gani uliyoipenda zaidi wakati wa kukaa hospitalini?</label><textarea name="q6"></textarea></div>
+    <div class="q"><label class="lbl">7. Kwa ujumla, una maoni gani kuhusu huduma ulizopata wakati wa kukaa hospitalini?</label><textarea name="q7"></textarea></div>
+  </div>
+
+  <div class="card pr-card">
+    <h2>&#128274; Sehemu ya matumizi ya PR pekee</h2>
+    <div class="field"><label class="lbl">Tarehe ya Kupokea Fomu</label><input type="date" name="pokea" class="today"></div>
+    <div class="field"><label class="lbl">Hatua iliyochukuliwa</label><textarea name="hatua"></textarea></div>
+    <div class="field"><label class="lbl">Ufuatiliaji unahitajika?</label>
+      <div class="opts">
+        <label class="pill"><input type="radio" name="fuatilia" value="Ndiyo"><span>Ndiyo</span></label>
+        <label class="pill"><input type="radio" name="fuatilia" value="Hapana"><span>Hapana</span></label>
+      </div>
+    </div>
+    <div class="field"><label class="lbl">Maelezo</label><textarea name="maelezo"></textarea></div>
+  </div>
+
+  <div class="form-err"></div>
+  <button class="submit" type="submit">Tuma Maoni</button>
+</form>
+</section>
+
+<section id="OPD" class="screen" hidden>
+<form id="f-OPD" novalidate>
+  <div class="card">
+    <h2>Taarifa za mgonjwa</h2>
+    <p class="sub">Lengo: Kuboresha huduma kwa kusikiliza maoni na changamoto za wagonjwa.</p>
+    <div class="row2">
+      <div class="field" data-req="tarehe"><label class="lbl">Tarehe<span class="req">*</span></label><input type="date" name="tarehe" class="today"><div class="err-msg">Chagua tarehe.</div></div>
+      <div class="field"><label class="lbl">Jina (hiari)</label><input type="text" name="jina" placeholder="Hiari"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Maoni kuhusu huduma ya leo</h2>
+    <p class="sub">&nbsp;</p>
+    <div class="q field" data-req="q1">
+      <label class="lbl">1. Umehudumiwa vipi kwa ujumla leo?<span class="req">*</span></label>
+      <div class="opts">
+        <label class="pill"><input type="radio" name="q1" value="Vizuri sana"><span>&#128516; Vizuri sana</span></label>
+        <label class="pill"><input type="radio" name="q1" value="Vizuri"><span>&#128578; Vizuri</span></label>
+        <label class="pill"><input type="radio" name="q1" value="Kawaida"><span>&#128528; Kawaida</span></label>
+        <label class="pill"><input type="radio" name="q1" value="Sijaridhika"><span>&#128542; Sijaridhika</span></label>
+      </div>
+      <div class="err-msg">Tafadhali chagua jibu.</div>
+    </div>
+    <div class="q field" data-req="q2">
+      <label class="lbl">2. Ni changamoto gani umekutana nayo leo?<span class="req">*</span></label>
+      <span class="hint">Unaweza kuchagua zaidi ya moja.</span>
+      <div class="opts col" id="q2opts"></div>
+      <input type="text" class="other" name="q2_other" placeholder="Eleza changamoto nyingine">
+      <div class="err-msg">Tafadhali chagua angalau jibu moja.</div>
+    </div>
+    <div class="q field" id="q3wrap">
+      <label class="lbl">3. Changamoto hiyo imetokea sehemu gani?</label>
+      <span class="hint">Ruka kama hukukutana na changamoto.</span>
+      <div class="opts" id="q3opts"></div>
+      <input type="text" class="other" name="q3_other" placeholder="Taja sehemu nyingine">
+    </div>
+    <div class="q"><label class="lbl">4. Tafadhali eleza kwa kifupi tatizo ulilokutana nalo.</label><textarea name="q4"></textarea></div>
+    <div class="q"><label class="lbl">5. Unashauri hospitali iboreshe nini ili wagonjwa wapate huduma bora zaidi?</label><textarea name="q5"></textarea></div>
+  </div>
+
+  <div class="card pr-card">
+    <h2>&#128274; Sehemu ya matumizi ya PR pekee</h2>
+    <div class="field"><label class="lbl">Hatua iliyochukuliwa</label><textarea name="hatua"></textarea></div>
+    <div class="field"><label class="lbl">Ufuatiliaji unahitajika?</label>
+      <div class="opts">
+        <label class="pill"><input type="radio" name="fuatilia" value="Ndiyo"><span>Ndiyo</span></label>
+        <label class="pill"><input type="radio" name="fuatilia" value="Hapana"><span>Hapana</span></label>
+      </div>
+    </div>
+    <div class="field"><label class="lbl">Maelezo</label><textarea name="maelezo"></textarea></div>
+  </div>
+
+  <div class="form-err"></div>
+  <button class="submit" type="submit">Tuma Maoni</button>
+</form>
+</section>
+
+<section id="thanks" class="screen" hidden>
+  <div class="card thanks">
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+    <h2>Asante kwa maoni yako!</h2>
+    <p>Maoni yako yatatusaidia kuboresha huduma kwa wagonjwa wetu.</p>
+    <div class="btns">
+      <button class="submit" type="button" id="again">Jaza fomu nyingine</button>
+      <button class="ghost" type="button" onclick="goHome()">Rudi mwanzo</button>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>Abdala Mzee Hospital · NSK Hospitals</footer>
+
+<script>
+var BACKEND = {"post": "https://docs.google.com/forms/d/e/1FAIpQLScxR5Zyijhzvpf3H60lnBjLENFaiqDyhKIWwMS-THWHtq_BZA/formResponse", "entries": {"moduli": "entry.1713783310", "pr": "entry.1162637317", "IPD_jina": "entry.118713908", "IPD_wodi": "entry.2071931257", "IPD_kulazwa": "entry.1741510226", "IPD_kuruhusiwa": "entry.953133690", "IPD_q1": "entry.1300723793", "IPD_c1": "entry.1639733841", "IPD_q2": "entry.151958056", "IPD_c2": "entry.558290031", "IPD_q3": "entry.1545231734", "IPD_c3": "entry.301516560", "IPD_q4": "entry.1607679827", "IPD_c4": "entry.947205675", "IPD_q5": "entry.1317822152", "IPD_q6": "entry.1876765911", "IPD_q7": "entry.1455220196", "IPD_pokea": "entry.663632921", "IPD_hatua": "entry.401659102", "IPD_fuatilia": "entry.858452813", "IPD_maelezo": "entry.1260719876", "OPD_tarehe": "entry.2102524062", "OPD_jina": "entry.1668517778", "OPD_q1": "entry.842275969", "OPD_q2": "entry.2094096393", "OPD_q3": "entry.189268632", "OPD_q4": "entry.866166994", "OPD_q5": "entry.480717876", "OPD_hatua": "entry.642080982", "OPD_fuatilia": "entry.1218817848", "OPD_maelezo": "entry.1212425261"}};
+var current = null;
+var IPDQ = [
+  ['q1','c1','1. Wakati wa kukaa wodini, ulihudumiwa vizuri na wauguzi?','Kama hapana, tatizo lilikuwa nini?'],
+  ['q2','c2','2. Ulipata huduma ya daktari kwa wakati ulipohitaji?','Maoni yako'],
+  ['q3','c3','3. Je, ulipata dawa na huduma ulizoelekezwa bila usumbufu mkubwa?','Kama hapana, eleza changamoto'],
+  ['q4','c4','4. Je, ulipewa maelezo ya kutosha kuhusu hali yako, matibabu au huduma ulizokuwa ukipata?','Maoni']
+];
+var Q2 = ['Kusubiri muda mrefu kwenye foleni','Kuchelewa kupata daktari','Kuchelewa kupata majibu ya vipimo','Kuchelewa kupata dawa pharmacy','Kukosa maelezo ya kutosha kuhusu huduma','Mawasiliano/huduma isiyoridhisha','Sijakutana na changamoto','Nyingine'];
+var Q3 = ['Usajili','Daktari/Consultation','Maabara','Ultrasound/Radiology','Pharmacy','Sehemu nyingine'];
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+
+(function build(){
+  var h = '';
+  IPDQ.forEach(function(q){
+    h += '<div class="q field" data-req="'+q[0]+'"><label class="lbl">'+esc(q[2])+'<span class="req">*</span></label><div class="opts">';
+    ['Ndiyo','Kiasi','Hapana'].forEach(function(v){ h += '<label class="pill"><input type="radio" name="'+q[0]+'" value="'+v+'"><span>'+v+'</span></label>'; });
+    h += '</div><div class="err-msg">Tafadhali chagua jibu.</div><div class="follow"><textarea name="'+q[1]+'" placeholder="'+esc(q[3])+'" style="min-height:64px"></textarea></div></div>';
+  });
+  document.getElementById('ipd-qs').innerHTML = h;
+  document.getElementById('q2opts').innerHTML = Q2.map(function(v){ return '<label class="pill"><input type="checkbox" name="q2" value="'+esc(v)+'"><span>'+esc(v)+'</span></label>'; }).join('');
+  document.getElementById('q3opts').innerHTML = Q3.map(function(v){ return '<label class="pill"><input type="checkbox" name="q3" value="'+esc(v)+'"><span>'+esc(v)+'</span></label>'; }).join('');
+  [['q2','Nyingine','q2_other'],['q3','Sehemu nyingine','q3_other']].forEach(function(o){
+    document.querySelectorAll('input[name='+o[0]+']').forEach(function(cb){
+      cb.addEventListener('change', function(){
+        var on = document.querySelector('input[name='+o[0]+'][value="'+o[1]+'"]').checked;
+        var t = document.querySelector('input[name='+o[2]+']');
+        t.classList.toggle('on', on); if (on && cb.value===o[1]) t.focus();
+      });
+    });
+  });
+  try { var saved = localStorage.getItem('amh_pr'); if (saved) document.getElementById('pr').value = saved; } catch(e) {}
+  document.querySelectorAll('input,textarea').forEach(function(el){
+    el.addEventListener('input', function(){ var f = el.closest('.has-err'); if (f) f.classList.remove('has-err'); });
+    el.addEventListener('change', function(){ var f = el.closest('.has-err'); if (f) f.classList.remove('has-err'); });
+  });
+  setToday();
+})();
+
+function setToday(){
+  var d = new Date(); var iso = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  document.querySelectorAll('input.today').forEach(function(i){ if(!i.value) i.value = iso; });
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(function(s){ s.hidden = true; });
+  document.getElementById(id).hidden = false;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function openModule(m){
+  var pr = document.getElementById('pr').value.trim();
+  if (!pr) { var w = document.getElementById('pr-wrap'); w.classList.add('has-err'); document.getElementById('pr').focus(); return; }
+  try { localStorage.setItem('amh_pr', pr); } catch(e) {}
+  current = m;
+  document.getElementById('topbar').hidden = false;
+  var tag = document.getElementById('toptag'); tag.textContent = m; tag.className = 'tag ' + m.toLowerCase();
+  document.getElementById('title').textContent = m === 'IPD' ? 'Fomu ya Maoni – IPD' : 'Fomu ya Maoni – OPD';
+  document.getElementById('subtitle').textContent = m === 'IPD' ? 'Wagonjwa wa kulazwa · Ijazwe mgonjwa anaporuhusiwa kwenda nyumbani.' : 'Wagonjwa wa nje · Maoni na changamoto za huduma ya leo.';
+  show(m);
+}
+
+function goHome(){
+  current = null;
+  document.getElementById('topbar').hidden = true;
+  document.getElementById('title').textContent = 'Maoni ya Wagonjwa';
+  document.getElementById('subtitle').textContent = 'Maoni yako yanatusaidia kuboresha huduma kwa wagonjwa wetu.';
+  show('home');
+}
+
+function collect(form){
+  var data = {}; var fd = new FormData(form);
+  fd.forEach(function(v, k){ v = String(v).trim(); if (!v) return; data[k] = data[k] ? data[k] + ', ' + v : v; });
+  ['q2','q3'].forEach(function(k){
+    var o = data[k + '_other'];
+    if (data[k]) data[k] = data[k].split(', ').filter(function(x){ return x !== 'Nyingine' && x !== 'Sehemu nyingine'; }).join(', ');
+    if (o) data[k] = (data[k] ? data[k] + ', ' : '') + 'Nyingine: ' + o;
+    delete data[k + '_other'];
+  });
+  return data;
+}
+
+function validate(form){
+  var ok = true, first = null;
+  form.querySelectorAll('[data-req]').forEach(function(f){
+    var n = f.getAttribute('data-req');
+    var els = form.querySelectorAll('[name="'+n+'"]'); var filled = false;
+    els.forEach(function(e){ if ((e.type === 'radio' || e.type === 'checkbox') ? e.checked : e.value.trim()) filled = true; });
+    f.classList.toggle('has-err', !filled);
+    if (!filled) { ok = false; if (!first) first = f; }
+  });
+  if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+  return ok;
+}
+
+['IPD','OPD'].forEach(function(m){
+  var form = document.getElementById('f-' + m);
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var errBox = form.querySelector('.form-err'); errBox.style.display = 'none';
+    if (!validate(form)) return;
+    var data = collect(form); data.pr = document.getElementById('pr').value.trim();
+    var btn = form.querySelector('.submit'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Inatuma...';
+    var body = new URLSearchParams();
+    body.append(BACKEND.entries.moduli, m);
+    body.append(BACKEND.entries.pr, data.pr);
+    Object.keys(data).forEach(function(k){ var e = BACKEND.entries[m + '_' + k]; if (e) body.append(e, data[k]); });
+    fetch(BACKEND.post, {method: 'POST', mode: 'no-cors', body: body})
+      .then(function(){
+        btn.disabled = false; btn.textContent = 'Tuma Maoni';
+        form.reset(); form.querySelectorAll('.other').forEach(function(o){ o.classList.remove('on'); });
+        setToday();
+        document.getElementById('again').onclick = function(){ openModule(m); };
+        show('thanks');
+      })
+      .catch(function(e){
+        btn.disabled = false; btn.textContent = 'Tuma Maoni';
+        errBox.textContent = 'Imeshindikana kutuma. Angalia mtandao kisha jaribu tena.';
+        errBox.style.display = 'block';
+      });
+  });
+});
+</script>
+</body>
+</html>
